@@ -26,7 +26,7 @@ namespace RunGroopTutorial.Controllers
             _clubRepository = clubRepository;
         }
 
-
+        //B4
         public IActionResult Index() //CCCCCCCCC - CONTROLER 
         {
             List<Club> clubs = _context.Clubs.ToList(); //data from table clubs and tolist //MMMMMMMMMM - MODEL
