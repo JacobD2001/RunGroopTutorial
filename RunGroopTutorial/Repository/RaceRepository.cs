@@ -34,9 +34,15 @@ namespace RunGroopTutorial.Repository
             return await _context.Races.ToListAsync(); //returns IEnumerable list
         }
 
-        public async Task<Race> GetByIdAsync(int id)
+        public async Task<Race?> GetByIdAsync(int id)
         {
-            return await _context.Races.FirstOrDefaultAsync(i => i.Id == id); //returns first element that satisfies specified condition in brackets()
+            return await _context.Races.Include(i => i.Address).FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+
+        public async Task<Race?> GetByIdAsyncNoTracking(int id)
+        {
+            return await _context.Races.Include(i => i.Address).AsNoTracking().FirstOrDefaultAsync();
         }
 
 
@@ -57,5 +63,7 @@ namespace RunGroopTutorial.Repository
             _context.Update(race);
             return Save();
         }
+
+     
     }
 }

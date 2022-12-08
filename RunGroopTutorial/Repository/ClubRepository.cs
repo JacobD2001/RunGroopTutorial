@@ -33,10 +33,17 @@ namespace RunGroopTutorial.Repository
         {
             return await _context.Clubs.ToListAsync(); //returns IEnumerable list
         }
-
+        //we need two getbyid as tracking two ids gets us an error
         public async Task<Club> GetByIdAsync(int id)
         {
-            return await _context.Clubs.FirstOrDefaultAsync(i => i.Id == id); //returns first element that satisfies specified condition in brackets()
+            //include as we go for relations address
+            return await _context.Clubs.Include(i => i.Adress).FirstOrDefaultAsync(i => i.Id == id); //returns first element that satisfies specified condition in brackets()
+        }
+        //The AsNoTracking method is used to specify that the returned Club object should not be tracked by the database context. When an entity is tracked by the database context, the context monitors the entity for changes, and will automatically update the database with any changes that are made to the entity.
+        public async Task<Club> GetByIdAsyncNoTracking(int id)
+        {
+            //include as we go for relations address
+            return await _context.Clubs.Include(i => i.Adress).AsNoTracking().FirstOrDefaultAsync(i => i.Id == id); //returns first element that satisfies specified condition in brackets()
         }
 
         //return list of clubs where city adress is like city club -> adress -> city

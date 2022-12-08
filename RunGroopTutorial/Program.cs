@@ -1,16 +1,21 @@
 using Microsoft.EntityFrameworkCore;
 using RunGroopTutorial.Data;
+using RunGroopTutorial.Helpers;
 using RunGroopTutorial.Interfaces;
 using RunGroopTutorial.Repository;
+using RunGroopTutorial.Services;
 using RunGroopWebApp.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-//3. adding services for sql injection
+//3. adding services for dependency injection
 builder.Services.AddScoped<IClubRepository, ClubRepository>();
 builder.Services.AddScoped<IRaceRepository, RaceRepository>();
+builder.Services.AddScoped<IPhotoService, PhotoService>();
+//for dependency injection but cloudinarysettings
+builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
 
 //setting up application and connection string goes to appsetings.json
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
