@@ -149,6 +149,24 @@ namespace RunGroopTutorial.Controllers
         }
 
 
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteClub(int id)
+        {
+            var raceDetails = await _raceRepository.GetByIdAsync(id);
+
+            if (raceDetails == null)
+            {
+                return View("Error");
+            }
+
+            if (!string.IsNullOrEmpty(raceDetails.Image))
+            {
+                _ = _photoService.DeletePhotoAsync(raceDetails.Image);
+            }
+
+            _raceRepository.Delete(raceDetails);
+            return RedirectToAction("Index");
+        }
 
 
 

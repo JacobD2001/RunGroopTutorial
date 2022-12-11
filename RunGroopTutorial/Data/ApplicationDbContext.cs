@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using RunGroopTutorial.Models;
 
 namespace RunGroopTutorial.Data
 {
-    public class ApplicationDbContext : DbContext //inheriting entityframework in some way
+    public class ApplicationDbContext : IdentityDbContext<AppUser> //inheriting entityframework in some way + identity fw
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) //ctor, meaning pass options to dbcontext
         {

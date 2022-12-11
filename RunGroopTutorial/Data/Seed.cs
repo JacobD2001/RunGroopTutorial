@@ -5,6 +5,7 @@ using RunGroopTutorial.Models;
 using RunGroopTutorial.Data.Enum;
 using RunGroopTutorial.Models;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using System.Net;
 // seed file
 namespace RunGroopWebApp.Data
 {
@@ -115,7 +116,7 @@ namespace RunGroopWebApp.Data
             }
         }
 
-    /*    public static async Task SeedUsersAndRolesAsync(IApplicationBuilder applicationBuilder)
+        public static async Task SeedUsersAndRolesAsync(IApplicationBuilder applicationBuilder)
         {
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
@@ -171,6 +172,6 @@ namespace RunGroopWebApp.Data
                     await userManager.AddToRoleAsync(newAppUser, UserRoles.User);
                 }
             }
-        }*/
+        }
     }
 }
